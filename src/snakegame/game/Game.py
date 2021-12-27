@@ -1,7 +1,9 @@
 import pygame
-import husnu_bey
 import NeroCup
+import husnu_bey
 import ui
+
+SIZE = 40
 
 class Game:
 
@@ -31,3 +33,15 @@ class Game:
 
         pygame.mixer.Sound.play(sound)
         # pygame.mixer.music.stop()
+
+
+    def reset(self):
+        self.husnu_bey = husnu_bey(self.surface)
+        self.neroCup = NeroCup(self.surface)
+
+
+    def is_collision(self, x1, y1, x2, y2):
+        if x1 >= x2 and x1 < x2 + SIZE:
+            if y1 >= y2 and y1 < y2 + SIZE:
+                return True
+        return False
