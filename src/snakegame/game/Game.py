@@ -45,3 +45,8 @@ class Game:
             if y1 >= y2 and y1 < y2 + SIZE:
                 return True
         return False
+
+if __name__ == '__main__':
+    currentDirec = "down"
+    game = Game()
+    game.run(currentDirec)
