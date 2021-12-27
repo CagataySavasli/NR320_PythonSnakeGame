@@ -1,5 +1,4 @@
 import pygame, pygame.font, pygame.event, pygame.draw, string
-from pip._internal.utils.misc import ask
 from pygame.locals import *
 import uuid
 
@@ -33,17 +32,75 @@ def show_box(screen, message):
                 ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - 10))
   pygame.display.flip()
 
-def main():
-      global display_p
-      display_p = []
-      screen = pygame.display.set_mode((320, 240))
-      print(ask(screen, "Username") + " was entered")
-      x = ask(screen, "Password")
-      for character in x:
+def ask(screen, question):
+  "ask(screen, question) -> answer"
+  pygame.font.init()
+  current_string_un = []
+  show_box(screen, question + ": " + string.join(current_string_un))
+  while 1:
+    inkey = get_event_key()
+    if inkey == K_BACKSPACE:
+      current_string_un = current_string_un[0:-1]
+    elif inkey == K_RETURN:
+      break
+    elif inkey == K_LSHIFT or inkey == K_RSHIFT:
+      inkey=get_event_key()
+      if inkey <= 127:
+        upper_case=inkey-32
+        current_string_un.append(chr(upper_case))
+    elif inkey <= 127:
+      current_string_un.append(chr(inkey))
+    show_box(screen, question + ": " + string.join(current_string_un))
+  return string.join(current_string_un)
+#password
+  global display_p
+  global current_string_p
+  current_string_p = []
+  display_p=[]
+  pro=''.join(display_p)
+  display_box(screen, question + ": " + pro)
+  while 1:
+    inkey = get_key()
+    if inkey == K_BACKSPACE:
+      current_string_p = current_string_p[0:-1]
+      display_p = display_p[0:-1]
+    elif inkey == K_RETURN:
+##      print(display_p))
+      break
+    elif inkey == K_LSHIFT or inkey == K_RSHIFT:
+      inkey=get_key()
+      if inkey <= 127:
+        upper_case=inkey-32
+        for character in current_string_p:
           display_p.append(symbol)
-      pro = ''.join(display_p)
-      print(x + " was entered")
-      print(pro)
+        pro=''.join(display_p)
+        display_box.blit(screen, question + ": " + pro)
+        current_string_p.append(chr(upper_case))
+    elif inkey <= 127:
+      for character in current_string_p:
+        display_p.append(symbol)
+      pro=''.join(display_p)
+      display_box.blit(screen, question + ": " + pro)
+      current_string_p.append(chr(inkey))
+
+
+##  return string.join(display_p)
+  return display_p
+##  return string.join(current_string_p)
+
+
+def main():
+  global display_p
+  display_p=[]
+  screen = pygame.display.set_mode((320,240))
+  print (ask(screen, "Username") + " was entered")
+  x = ask(screen, "Password")
+  for character in x:
+    display_p.append(symbol)
+  pro=''.join(display_p)
+  print (x + " was entered")
+  print(pro)
+
 
 if __name__ == '__main__':
       main()
