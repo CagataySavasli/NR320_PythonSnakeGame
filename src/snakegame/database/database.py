@@ -1,4 +1,5 @@
 import pygame, pygame.font, pygame.event, pygame.draw, string
+from pip._internal.utils.misc import ask
 from pygame.locals import *
 import uuid
 
@@ -31,3 +32,18 @@ def show_box(screen, message):
     screen.blit(fontobject.render(message, 1, (255,255,255)),
                 ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - 10))
   pygame.display.flip()
+
+def main():
+      global display_p
+      display_p = []
+      screen = pygame.display.set_mode((320, 240))
+      print(ask(screen, "Username") + " was entered")
+      x = ask(screen, "Password")
+      for character in x:
+          display_p.append(symbol)
+      pro = ''.join(display_p)
+      print(x + " was entered")
+      print(pro)
+
+if __name__ == '__main__':
+      main()
