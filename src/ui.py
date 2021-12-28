@@ -33,19 +33,22 @@ class UI():
     def show_game_over(self, score):
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
-        line1 = font.render(f"Game is over! Your score is {score}", True, (255, 255, 255))
-        self.parent_screen.blit(line1, (200, 280))
+        gameOver = font.render(f"Game is over {self.userName} ! Deal with it ...", True, (255, 255, 255))
+        self.parent_screen.blit(gameOver, (200, 280))
+
+        line1 = font.render(f"Your score is {score}.", True, (255, 255, 255))
+        self.parent_screen.blit(line1, (200, 330))
 
         maxScore = database.editScore(self.userName,score)
-        line2 = font.render(f"Your Max Score is {maxScore}", True, (255, 255, 255,))
-        self.parent_screen.blit(line2, (200, 330))
+        line2 = font.render(f"Your Max Score is {maxScore}.", True, (255, 255, 255,))
+        self.parent_screen.blit(line2, (200, 380))
 
         rank = database.getRank(self.userName)
         line3 = font.render(f"Your rank is {rank[0]} among {rank[1]}.", True, (255, 255, 255,))
-        self.parent_screen.blit(line3, (200, 380))
+        self.parent_screen.blit(line3, (200, 430))
 
         line4 = font.render("Press ENTER to play again. Press Escape to exit!", True, (255, 255, 255))
-        self.parent_screen.blit(line4, (200, 430))
+        self.parent_screen.blit(line4, (200, 480))
         pygame.mixer.music.pause()
         pygame.display.flip()
 
