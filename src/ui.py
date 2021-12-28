@@ -13,6 +13,11 @@ class UI():
     den2 = ""
 
     button = pygame.Rect(400, 450, 150, 50)
+
+    button2 = pygame.Rect(300, 200, 400, 100)
+    button3 = pygame.Rect(325, 230, 150, 50)
+    button4 = pygame.Rect(500, 230, 150, 50)
+
     clock = pygame.time.Clock()
     fps = 60
     size = [200, 200]
@@ -46,9 +51,13 @@ class UI():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = event.pos
                 if self.button.collidepoint(mouse_pos):
-                    # prints current location of mouse
                     self.signin()
                     self.show_box(self.den1,self.den2)
+
+                if self.button3.collidepoint(mouse_pos):
+                    return False
+                if self.button4.collidepoint(mouse_pos):
+                    return True
 
             if event.type == pygame.QUIT:
                 return pygame.quit()
@@ -65,7 +74,7 @@ class UI():
         line1 = font.render("Welcome To NR320", True, (255, 255, 255))
         self.parent_screen.blit(line1, (400, 150))
 
-        line2 = font.render("Login : ", True, (255, 255, 255))
+        line2 = font.render("{} : ".format(slTest), True, (255, 255, 255))
         self.parent_screen.blit(line2, (400, 250))
 
         if slTest == "Login":
@@ -141,6 +150,22 @@ class UI():
                 show_box.blit(screen, question + ": " + pro, slTest)
                 current_str_p.append(chr(inkey))
         return display_p
+
+    def exitQues(self):
+        font = pygame.font.SysFont('arial', 30)
+
+        pygame.draw.rect(self.parent_screen, [255, 255, 0], self.button2)
+
+        pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button3)
+        l2 = font.render("yes", True, (255, 255, 255))
+        self.parent_screen.blit(l2, (335, 230))
+
+        pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button4)
+        l3 = font.render("no", True, (255, 255, 255))
+        self.parent_screen.blit(l3, (520, 230))
+
+        pygame.display.flip()
+        return self.get_key()
 
     def login(self):
         self.den1 = "Username"

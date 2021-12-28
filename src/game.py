@@ -149,12 +149,14 @@ class Game:
     def run(self, currentDirec):
         running = True
         pause = False
-        self.login()
         while running:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        running = False
+                        pause = True
+                        sw = self.showScreen.exitQues()
+                        running = sw
+                        pause = not sw
 
                     if event.key == K_RETURN:
                         pygame.mixer.music.unpause()
@@ -178,7 +180,10 @@ class Game:
                             currentDirec = "down"
 
                 elif event.type == QUIT:
-                    running = False
+                    pause = True
+                    sw = self.showScreen.exitQues()
+                    running = sw
+                    pause = not sw
             try:
 
                 if not pause:
@@ -194,4 +199,5 @@ class Game:
 if __name__ == '__main__':
     currentDirec = "down"
     game = Game()
+    game.login()
     game.run(currentDirec)
