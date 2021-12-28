@@ -40,8 +40,12 @@ class UI():
         line2 = font.render(f"Your Max Score is {maxScore}", True, (255, 255, 255,))
         self.parent_screen.blit(line2, (200, 330))
 
-        line3 = font.render("Press ENTER to play again. Press Escape to exit!", True, (255, 255, 255))
+        rank = database.getRank(self.userName)
+        line3 = font.render(f"Your rank is {rank[0]} among {rank[1]}.", True, (255, 255, 255,))
         self.parent_screen.blit(line3, (200, 380))
+
+        line4 = font.render("Press ENTER to play again. Press Escape to exit!", True, (255, 255, 255))
+        self.parent_screen.blit(line4, (200, 430))
         pygame.mixer.music.pause()
         pygame.display.flip()
 
