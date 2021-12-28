@@ -37,7 +37,6 @@ class UI():
                 pass
 
     def show_box(self, message):
-        "Print a message in a box in the middle of the screen"
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
         line1 = font.render("Welcome To NR320", True, (255, 255, 255))
@@ -55,6 +54,8 @@ class UI():
                           204, 24), 1)
 
         pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button)
+        line3 = font.render("{} : ".format("Signin"), True, (255, 255, 255))
+        self.parent_screen.blit(line3, (420, 450))
 
         if len(message) != 0:
             self.parent_screen.blit(fontobject.render(message, 1, (255, 255, 255)),
@@ -125,4 +126,3 @@ class UI():
             password = self.ask("Password")
             if not ([userName, password] in self.userPass):
                 self.login_panel()
-
