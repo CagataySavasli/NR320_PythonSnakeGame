@@ -25,5 +25,10 @@ def editScore(name, score):
         return score
     return row[0][0]
 
+def login(name,password):
+    cursor.execute("SELECT COUNT(name) FROM players WHERE name = ? AND password = ?",(name, password))
+    row = cursor.fetchall()
+    return row[0][0]
+
 
 
