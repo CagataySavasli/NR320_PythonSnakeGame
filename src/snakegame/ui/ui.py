@@ -35,18 +35,29 @@ class UI():
                 mouse_pos = event.pos
                 if self.button.collidepoint(mouse_pos):
                     print("Signin")
+            if event.type == pygame.QUIT:
+                return pygame.quit()
             if event.type == KEYDOWN:
                 return event.key
             else:
                 pass
 
-    def show_box(self, message):
+    def show_box(self, message,slTest):
+
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
+
         line1 = font.render("Welcome To NR320", True, (255, 255, 255))
         self.parent_screen.blit(line1, (400, 150))
+
         line2 = font.render("Login : ", True, (255, 255, 255))
         self.parent_screen.blit(line2, (400, 250))
+
+        if slTest == "Login":
+            pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button)
+            line3 = font.render("{} : ".format("Signin"), True, (255, 255, 255))
+            self.parent_screen.blit(line3, (420, 450))
+
         fontobject = pygame.font.Font(None, 18)
         pygame.draw.rect(self.parent_screen, (0, 0, 0),
                          ((self.parent_screen.get_width() / 2) - 100,
@@ -57,22 +68,20 @@ class UI():
                           (self.parent_screen.get_height() / 2) - 12,
                           204, 24), 1)
 
-        pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button)
-        line3 = font.render("{} : ".format("Signin"), True, (255, 255, 255))
-        self.parent_screen.blit(line3, (420, 450))
 
         if len(message) != 0:
             self.parent_screen.blit(fontobject.render(message, 1, (255, 255, 255)),
                         ((self.parent_screen.get_width() / 2) - 100, (self.parent_screen.get_height() / 2) - 10))
         pygame.display.flip()
 
-        def ask(self, question):
+        def ask(self, question,slTest):
             "ask(screen, question) -> answer"
             pygame.font.init()
             current_str_un = []
             self.show_box(question + ": " + self.str.join(current_str_un))
             running = True
             while running:
+
                 inkey = self.get_key()
                 if inkey == K_BACKSPACE:
                     current_str_un = current_str_un[0:-1]
@@ -85,7 +94,7 @@ class UI():
                         current_str_un.append(chr(upper_case))
                 elif inkey <= 127:
                     current_str_un.append(chr(inkey))
-                self.show_box(question + ": " + self.str.join(current_str_un))
+                self.show_box(question + ": " + self.str.join(current_str_un), slTest)
             return self.str.join(current_str_un)
             # password
             global display_p
@@ -93,7 +102,7 @@ class UI():
             current_str_p = []
             display_p = []
             pro = ''.join(display_p)
-            display_box(screen, question + ": " + pro)
+            show_box(screen, question + ": " + pro, slTest)
             while 1:
                 inkey = get_key()
                 if inkey == K_BACKSPACE:
@@ -109,13 +118,13 @@ class UI():
                         for character in current_str_p:
                             display_p.append(symbol)
                         pro = ''.join(display_p)
-                        display_box.blit(screen, question + ": " + pro)
+                        show_box.blit(screen, question + ": " + pro, slTest)
                         current_str_p.append(chr(upper_case))
                 elif inkey <= 127:
                     for character in current_str_p:
                         display_p.append(symbol)
                     pro = ''.join(display_p)
-                    display_box.blit(screen, question + ": " + pro)
+                    show_box.blit(screen, question + ": " + pro, slTest)
                     current_str_p.append(chr(inkey))
 
             ##  return string.join(display_p)
@@ -123,10 +132,11 @@ class UI():
 
         ##  return string.join(current_string_p)
 
-        def login_panel(self):
+        def login(self):
+            self.userName = self.ask("Username", "Login")
+            self.password = self.ask("Password", "Login")
+
+        def startScreen(self):
             global display_p
             display_p = []
-            userName = self.ask("Username")
-            password = self.ask("Password")
-            if not ([userName, password] in self.userPass):
-                self.login_panel()
+            self.login()
