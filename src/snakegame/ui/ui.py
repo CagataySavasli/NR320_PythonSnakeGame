@@ -26,6 +26,7 @@ class UI():
     current_str_p = []
     display_p = []
     userPass = [["ata","ala"],["cago,sago"]]
+    button = pygame.Rect(400, 450, 150, 50)
 
     def get_key(self):
         while 1:
@@ -52,6 +53,8 @@ class UI():
                          ((self.parent_screen.get_width() / 2) - 102,
                           (self.parent_screen.get_height() / 2) - 12,
                           204, 24), 1)
+
+        pygame.draw.rect(self.parent_screen, [255, 0, 0], self.button)
 
         if len(message) != 0:
             self.parent_screen.blit(fontobject.render(message, 1, (255, 255, 255)),
@@ -122,3 +125,4 @@ class UI():
             password = self.ask("Password")
             if not ([userName, password] in self.userPass):
                 self.login_panel()
+
