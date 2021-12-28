@@ -15,7 +15,6 @@ def signin(name, password):
     except Exception as e:
         return False
 
-
 def editScore(name, score):
     cursor.execute("SELECT p.maxScore FROM players as p WHERE p.name = '{}'".format(name))
     row = cursor.fetchall()
@@ -30,5 +29,11 @@ def login(name,password):
     row = cursor.fetchall()
     return row[0][0]
 
-
-
+def editScore(name, score):
+    cursor.execute("SELECT p.maxScore FROM players as p WHERE p.name = '{}'".format(name))
+    row = cursor.fetchall()
+    if row[0][0] < score:
+        cursor.execute("UPDATE players SET maxScore = ? WHERE name = ?", (score, name))
+        con.commit()
+        return score
+    return row[0][0]
