@@ -17,7 +17,7 @@ class husnu_bey:
 
 
     def move_on(self):
-        #updating husnu_bey body
+        #updating husnu_bey's body
         for i in range(self.length-1,0,-1):
             self.x[i] = self.x[i-1]
             self.y[i] = self.y[i-1]
