@@ -1,6 +1,7 @@
 import pygame
 
 SIZE = 40
+BACKGROUND_COLOR = (110, 110, 5)
 
 class husnu_bey:
     def __init__(self, parent_screen):
@@ -22,7 +23,7 @@ class husnu_bey:
             self.x[i] = self.x[i-1]
             self.y[i] = self.y[i-1]
 
-        #updating husnu_bey head
+        #updating husnu_bey's head
         if self.direct == 'left':
             self.x[0] -= SIZE
 
