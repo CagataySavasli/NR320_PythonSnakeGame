@@ -31,6 +31,10 @@ class UI():
     def get_key(self):
         while 1:
             event = pygame.event.poll()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos
+                if self.button.collidepoint(mouse_pos):
+                    print("Signin")
             if event.type == KEYDOWN:
                 return event.key
             else:
