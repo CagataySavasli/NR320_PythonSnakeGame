@@ -2,6 +2,7 @@ import pygame
 import random
 
 SIZE = 40
+BACKGROUND_COLOR = (110, 110, 5)
 
 class NeroCup:
     def __init__(self, parent_screen):
