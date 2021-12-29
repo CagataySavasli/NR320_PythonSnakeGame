@@ -71,6 +71,7 @@ class Snake:
         self.y.append(-1)
 
 class Game:
+    colSW = True
 
     def __init__(self):
         pygame.init()
@@ -155,6 +156,9 @@ class Game:
                     if event.key == K_ESCAPE:
                         pause = True
                         sw = self.showScreen.exitQues()
+                        if (not sw) and self.colSW:
+                            self.showScreen.show_game_over(self.snake.length, False)
+                            time.sleep(2)
                         running = sw
                         pause = not sw
 
@@ -182,6 +186,9 @@ class Game:
                 elif event.type == QUIT:
                     pause = True
                     sw = self.showScreen.exitQues()
+                    if (not sw) and self.colSW:
+                        self.showScreen.show_game_over(self.snake.length, False)
+                        time.sleep(2)
                     running = sw
                     pause = not sw
             try:
@@ -190,7 +197,8 @@ class Game:
                     self.play()
 
             except Exception as e:
-                self.showScreen.show_game_over(self.snake.length)
+                self.colSW = False
+                self.showScreen.show_game_over(self.snake.length, True)
                 pause = True
                 self.reset()
 

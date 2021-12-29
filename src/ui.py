@@ -30,10 +30,10 @@ class UI():
         bg = pygame.image.load("assets/background.jpg")
         self.parent_screen.blit(bg, (0,0))
 
-    def show_game_over(self, score):
+    def show_game_over(self, score,sw):
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
-        gameOver = font.render(f"Game is over {self.userName} ! Deal with it ...", True, (255, 255, 255))
+        gameOver = font.render(f"Game is over {self.userName} !", True, (255, 255, 255))
         self.parent_screen.blit(gameOver, (200, 280))
 
         line1 = font.render(f"Your score is {score}.", True, (255, 255, 255))
@@ -47,8 +47,9 @@ class UI():
         line3 = font.render(f"Your rank is {rank[0]} among {rank[1]}.", True, (255, 255, 255,))
         self.parent_screen.blit(line3, (200, 430))
 
-        line4 = font.render("Press ENTER to play again. Press Escape to exit!", True, (255, 255, 255))
-        self.parent_screen.blit(line4, (200, 480))
+        if sw:
+            line4 = font.render("Press ENTER to play again. Press Escape to exit!", True, (255, 255, 255))
+            self.parent_screen.blit(line4, (200, 480))
         pygame.mixer.music.pause()
         pygame.display.flip()
 
