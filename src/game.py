@@ -156,11 +156,14 @@ class Game:
                     if event.key == K_ESCAPE:
                         pause = True
                         sw = self.showScreen.exitQues()
-                        if (not sw) and self.colSW:
-                            self.showScreen.show_game_over(self.snake.length, False)
-                            time.sleep(2)
+                        if (not sw):
+                            database.onlineOffline(self.showScreen.userName, 0)
+                            if self.colSW:
+                                self.showScreen.show_game_over(self.snake.length, False)
+                                time.sleep(2)
                         running = sw
                         pause = not sw
+
 
                     if event.key == K_RETURN:
                         pygame.mixer.music.unpause()
@@ -186,11 +189,14 @@ class Game:
                 elif event.type == QUIT:
                     pause = True
                     sw = self.showScreen.exitQues()
-                    if (not sw) and self.colSW:
-                        self.showScreen.show_game_over(self.snake.length, False)
-                        time.sleep(2)
+                    if (not sw):
+                        database.onlineOffline(self.showScreen.userName, 0)
+                        if self.colSW:
+                            self.showScreen.show_game_over(self.snake.length, False)
+                            time.sleep(2)
                     running = sw
                     pause = not sw
+
             try:
 
                 if not pause:

@@ -5,12 +5,12 @@ con = sqlite3.connect("nr320.db")
 cursor = con.cursor()
 
 def createTable():
-    cursor.execute("CREATE TABLE IF NOT EXISTS players (name TEXT NOT NULL UNIQUE,password TEXT,maxScore INT)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS players (name TEXT NOT NULL UNIQUE,password TEXT,maxScore INT, online INT)")
     con.commit()
 
 def signin(name, password):
     try:
-        cursor.execute("INSERT INTO players (name, password, maxScore) VALUES(?, ?, ?)", (name, password, 0))
+        cursor.execute("INSERT INTO players (name, password, maxScore, online) VALUES(?, ?, ?, ?)", (name, password, 0, 0))
         con.commit()
     except Exception as e:
         return False
@@ -41,5 +41,13 @@ def getRank(name):
         if index[0] == name:
             return [index[1],len(row)]
 
+def onlineOffline(name, onOff):
+    cursor.execute("UPDATE players SET online = ? WHERE name = ?", (onOff, name))
+    con.commit()
 
+
+def getOnline(name):
+    cursor.execute("SELECT online FROM players WHERE name = '{}'".format(name))
+    row = cursor.fetchall()
+    return int(row[0][0])
 

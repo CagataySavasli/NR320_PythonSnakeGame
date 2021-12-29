@@ -183,8 +183,14 @@ class UI():
         self.den2 = "Login"
         self.password = self.ask("Password", "Login")
 
+
         if not database.login(self.userName, self.password):
             self.login()
+        else:
+            if database.getOnline(self.userName):
+                self.login()
+
+        database.onlineOffline(self.userName,1)
 
     def signin(self):
         self.userName = self.ask("Username", "Signin")
