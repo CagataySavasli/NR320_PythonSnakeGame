@@ -1,7 +1,6 @@
 # NR320_PythonSnakeGame
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dHKFFMfcBsprs_-ew6yBorzuWIExWmsOtw&s" alt="OzU Logo" width="50" height="50"/>
-<img src="https://www.butaworld.com/storage/medias/bgBSHp8MivzWfugde0BbT1rKVpE5KVof5mNQxIwG.jpeg" alt="Nero Logo" width="50" height="50"/>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dHKFFMfcBsprs_-ew6yBorzuWIExWmsOtw&s" alt="OzU Logo" width="50" height="50"/> <img src="https://www.butaworld.com/storage/medias/bgBSHp8MivzWfugde0BbT1rKVpE5KVof5mNQxIwG.jpeg" alt="Nero Logo" width="50" height="50"/>
 
 
 ## 📖 Project Overview
