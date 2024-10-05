@@ -2,17 +2,16 @@ import pygame
 from pygame.locals import *
 import time
 import random
-import ui
-import database
+from src.ui import UI
+from src.database import *
 
 SIZE = 40
 BACKGROUND_COLOR = (110, 110, 5)
 
-
 class NeroCup:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = pygame.image.load("assets/neroCup.jpg").convert()
+        self.image = pygame.image.load("src/assets/neroCup.jpg").convert()
         self.x = 120
         self.y = 120
 
@@ -27,7 +26,7 @@ class NeroCup:
 class Snake:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = pygame.image.load("assets/husnu_bey.jpg").convert()
+        self.image = pygame.image.load("src/assets/husnu_bey.jpg").convert()
         self.direction = 'down'
 
         self.length = 1
@@ -85,17 +84,17 @@ class Game:
         self.snake.draw()
         self.neroCup = NeroCup(self.surface)
         self.neroCup.draw()
-        self.showScreen = ui.UI(self.surface)
+        self.showScreen = UI(self.surface)
 
     def play_background_music(self):
-        pygame.mixer.music.load('assets/bg_music_1.mp3')
+        pygame.mixer.music.load('src/assets/bg_music_1.mp3')
         pygame.mixer.music.play(-1, 0)
 
     def play_sound(self, sound_name):
         if sound_name == "crash":
-            sound = pygame.mixer.Sound("assets/crash.mp3")
+            sound = pygame.mixer.Sound("src/assets/crash.mp3")
         elif sound_name == 'ding':
-            sound = pygame.mixer.Sound("assets/ding.mp3")
+            sound = pygame.mixer.Sound("src/assets/ding.mp3")
 
         pygame.mixer.Sound.play(sound)
         # pygame.mixer.music.stop()
@@ -157,7 +156,7 @@ class Game:
                         pause = True
                         sw = self.showScreen.exitQues()
                         if (not sw):
-                            database.onlineOffline(self.showScreen.userName, 0)
+                            onlineOffline(self.showScreen.userName, 0)
                             if self.colSW:
                                 self.showScreen.show_game_over(self.snake.length, False)
                                 time.sleep(2)
@@ -190,7 +189,7 @@ class Game:
                     pause = True
                     sw = self.showScreen.exitQues()
                     if (not sw):
-                        database.onlineOffline(self.showScreen.userName, 0)
+                        onlineOffline(self.showScreen.userName, 0)
                         if self.colSW:
                             self.showScreen.show_game_over(self.snake.length, False)
                             time.sleep(2)
@@ -209,9 +208,3 @@ class Game:
                 self.reset()
 
             time.sleep(.1)
-
-if __name__ == '__main__':
-    currentDirec = "down"
-    game = Game()
-    game.login()
-    game.run(currentDirec)

@@ -1,7 +1,7 @@
 import pygame, pygame.font, pygame.event, pygame.draw, string
 from pygame.locals import *
 import pygame
-import database
+from src.database import *
 
 class UI():
     str = ''
@@ -27,7 +27,7 @@ class UI():
         self.parent_screen = parent_screen
 
     def render_background(self):
-        bg = pygame.image.load("assets/background.jpg")
+        bg = pygame.image.load("src/assets/background.jpg")
         self.parent_screen.blit(bg, (0,0))
 
     def show_game_over(self, score,sw):
@@ -39,11 +39,11 @@ class UI():
         line1 = font.render(f"Your score is {score}.", True, (255, 255, 255))
         self.parent_screen.blit(line1, (200, 330))
 
-        maxScore = database.editScore(self.userName,score)
+        maxScore = editScore(self.userName,score)
         line2 = font.render(f"Your Max Score is {maxScore}.", True, (255, 255, 255,))
         self.parent_screen.blit(line2, (200, 380))
 
-        rank = database.getRank(self.userName)
+        rank = getRank(self.userName)
         line3 = font.render(f"Your rank is {rank[0]} among {rank[1]}.", True, (255, 255, 255,))
         self.parent_screen.blit(line3, (200, 430))
 
@@ -184,24 +184,24 @@ class UI():
         self.password = self.ask("Password", "Login")
 
 
-        if not database.login(self.userName, self.password):
+        if not login(self.userName, self.password):
             self.login()
         else:
-            if database.getOnline(self.userName):
+            if getOnline(self.userName):
                 self.login()
 
-        database.onlineOffline(self.userName,1)
+        onlineOffline(self.userName,1)
 
     def signin(self):
         self.userName = self.ask("Username", "Signin")
         self.password = self.ask("Password", "Signin")
-        if not database.checkForSignin(self.userName):
-            database.signin(self.userName, self.password)
+        if not checkForSignin(self.userName):
+            signin(self.userName, self.password)
         else:
             self.signin()
 
     def startScreen(self):
         global display_p
         display_p = []
-        database.createTable()
+        createTable()
         self.login()
